@@ -1,0 +1,186 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+body {
+font-family: Arial, sans-serif;
+background: #0b0d12;
+color: #f4f4f5;
+min-height: 100vh;
+}
+
+.container {
+width: 90%;
+max-width: 1100px;
+margin: 0 auto;
+}
+
+header {
+border-bottom: 1px solid #252832;
+padding: 22px 0;
+}
+
+.navbar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.logo {
+font-size: 26px;
+font-weight: bold;
+color: #8b7cff;
+}
+
+.badge {
+color: #b8b9c5;
+font-size: 13px;
+}
+
+.hero {
+text-align: center;
+padding: 75px 0 35px;
+}
+
+.hero h1 {
+font-size: clamp(32px, 5vw, 48px);
+margin-bottom: 18px;
+}
+
+.hero h1 span {
+color: #8b7cff;
+}
+
+.hero p {
+color: #a3a6b4;
+line-height: 1.7;
+max-width: 650px;
+margin: 0 auto;
+}
+
+.search-section {
+max-width: 760px;
+margin: 25px auto 45px;
+}
+
+.search-box {
+display: flex;
+gap: 12px;
+background: #151821;
+border: 1px solid #303442;
+padding: 10px;
+border-radius: 14px;
+}
+
+.search-box input {
+flex: 1;
+min-width: 0;
+background: transparent;
+border: none;
+outline: none;
+color: white;
+padding: 12px;
+font-size: 15px;
+}
+
+button {
+background: #7865f5;
+color: white;
+border: none;
+border-radius: 9px;
+padding: 12px 20px;
+font-size: 14px;
+cursor: pointer;
+}
+
+button:hover {
+background: #6652e8;
+}
+
+.upload-card {
+background: #151821;
+border: 1px dashed #45495b;
+border-radius: 14px;
+padding: 30px;
+text-align: center;
+margin-bottom: 50px;
+}
+
+.upload-card h2 {
+font-size: 20px;
+margin-bottom: 10px;
+}
+
+.upload-card p {
+color: #a3a6b4;
+margin-bottom: 20px;
+font-size: 14px;
+line-height: 1.6;
+}
+
+.section-heading {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
+gap: 12px;
+}
+
+.section-heading h2 {
+font-size: 21px;
+}
+
+.section-heading span {
+color: #a3a6b4;
+font-size: 13px;
+}
+
+.empty-state {
+border: 1px solid #252832;
+border-radius: 14px;
+padding: 45px 20px;
+text-align: center;
+color: #a3a6b4;
+margin-bottom: 70px;
+}
+
+.empty-state h3 {
+color: #f4f4f5;
+margin-bottom: 10px;
+}
+
+.empty-state p {
+line-height: 1.6;
+}
+
+footer {
+border-top: 1px solid #252832;
+padding: 22px 0;
+text-align: center;
+color: #777b8b;
+font-size: 13px;
+}
+
+@media (max-width: 600px) {
+.hero {
+padding-top: 55px;
+}
+
+
+.search-box {
+    flex-direction: column;
+}
+
+.search-box button {
+    width: 100%;
+}
+
+.section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+
+}
