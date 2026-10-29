@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#080A12">
+    <meta name="description" content="RecallQ helps you rediscover your digital information.">
+
+    <title>{% block title %}RecallQ | Your Digital Memory{% endblock %}</title>
+
+    <!-- Shared design system -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Page-specific CSS -->
+    {% block page_css %}{% endblock %}
+</head>
+
+<body>
+
+    {% block content %}{% endblock %}
+
+    <!-- Shared JavaScript can be added here later -->
+
+    <!-- Page-specific JavaScript -->
+    {% block page_js %}{% endblock %}
+
+</body>
+</html>
+
+

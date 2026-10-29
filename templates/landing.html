@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block title %}RecallQ | Your Digital Memory, Reimagined{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/landing.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- Navigation -->
+<header class="site-header">
+    <nav class="nav-container" aria-label="Main navigation">
+
+        <a href="{{ url_for('home') }}" class="brand">
+            <span class="brand-icon">R</span>
+            <span class="brand-name">Recall<span>Q</span></span>
+        </a>
+
+        <div class="nav-links">
+            <a href="#how-it-works">How It Works</a>
+            <a href="#features">Features</a>
+        </div>
+
+        <div class="nav-actions">
+            <a href="{{ url_for('workspace') }}" class="nav-workspace">
+                Open Workspace <span aria-hidden="true">↗</span>
+            </a>
+
+            <a href="{{ url_for('workspace') }}" class="nav-cta">
+                Get Started <span aria-hidden="true">→</span>
+            </a>
+        </div>
+
+    </nav>
+</header>
+
+
+<!-- Hero -->
+<main>
+
+    <section class="hero-section">
+
+        <div class="hero-container">
+
+            <!-- Left: Product message -->
+            <div class="hero-content">
+
+                <div class="hero-eyebrow">
+                    <span class="status-dot"></span>
+                    YOUR DIGITAL MEMORY, REIMAGINED
+                </div>
+
+                <h1>
+                    Remember what matters.
+                    <span>Find it when you need it.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Your screenshots, documents, and notes hold valuable
+                    information. RecallQ is designed to help you rediscover
+                    what you've saved without remembering where you put it.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="{{ url_for('workspace') }}" class="button-primary">
+                        Explore Your Memory <span aria-hidden="true">→</span>
+                    </a>
+
+                    <a href="#how-it-works" class="button-secondary">
+                        Discover How It Works
+                    </a>
+                </div>
+
+                <div class="hero-note">
+                    <span class="note-icon" aria-hidden="true">✦</span>
+                    One place for the information you don't want to lose.
+                </div>
+
+            </div>
+
+
+            <!-- Right: Product preview -->
+            <div class="hero-visual">
+
+                <div class="visual-glow"></div>
+
+                <div class="preview-window">
+
+                    <div class="preview-topbar">
+                        <div class="window-dots" aria-hidden="true">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <span class="preview-label">RECALLQ WORKSPACE</span>
+
+                        <span class="preview-indicator">
+                            <span></span> PREVIEW
+                        </span>
+                    </div>
+
+
+                    <div class="preview-body">
+
+                        <div class="preview-greeting">
+                            <div>
+                                <span class="preview-overline">YOUR DIGITAL LIBRARY</span>
+                                <h2>Your memory, connected.</h2>
+                            </div>
+
+                            <div class="memory-symbol" aria-hidden="true">✳</div>
+                        </div>
+
+
+                        <div class="preview-search">
+                            <span class="search-symbol" aria-hidden="true">⌕</span>
+
+                            <span>Find something you remember...</span>
+
+                            <span class="search-shortcut">⌘ K</span>
+                        </div>
+
+
+                        <div class="preview-results-heading">
+                            <span>YOUR DIGITAL WORLD</span>
+                            <span>EXAMPLE FILES</span>
+                        </div>
+
+
+                        <div class="preview-file">
+                            <div class="file-icon pdf-icon">PDF</div>
+
+                            <div class="file-details">
+                                <strong>Project Research</strong>
+                                <span>Research document</span>
+                            </div>
+
+                            <span class="file-arrow" aria-hidden="true">↗</span>
+                        </div>
+
+
+                        <div class="preview-file">
+                            <div class="file-icon image-icon">IMG</div>
+
+                            <div class="file-details">
+                                <strong>Saved Screenshot</strong>
+                                <span>Image collection</span>
+                            </div>
+
+                            <span class="file-arrow" aria-hidden="true">↗</span>
+                        </div>
+
+
+                        <div class="preview-file">
+                            <div class="file-icon note-icon-box">TXT</div>
+
+                            <div class="file-details">
+                                <strong>Personal Notes</strong>
+                                <span>Text document</span>
+                            </div>
+
+                            <span class="file-arrow" aria-hidden="true">↗</span>
+                        </div>
+
+
+                        <div class="preview-footer">
+                            <span class="preview-footer-icon">✦</span>
+                            <span>A more thoughtful way to find your files.</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="floating-card floating-card-top">
+                    <span class="floating-icon">✳</span>
+
+                    <div>
+                        <strong>Built around your memory</strong>
+                        <span>Not just filenames</span>
+                    </div>
+                </div>
+
+
+                <div class="floating-card floating-card-bottom">
+                    <span class="floating-check">✓</span>
+
+                    <div>
+                        <strong>Your information</strong>
+                        <span>One searchable library</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="hero-bottom-line" aria-hidden="true"></div>
+
+    </section>
+
+
+    <!-- More landing-page sections will be added here. -->
+
+</main>
+
+{% endblock %}
+
+
