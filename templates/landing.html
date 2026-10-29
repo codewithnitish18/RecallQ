@@ -1,13 +1,173 @@
-{% extends "base.html" %}
-
-{% block title %}RecallQ | Your Digital Memory, Reimagined{% endblock %}
 
 {% block page_css %}
 <link rel="stylesheet"
       href="{{ url_for('static', filename='css/landing.css') }}">
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/intro.css') }}">
 {% endblock %}
 
 {% block content %}
+<!-- =========================================
+     RecallQ Cinematic Product Intro
+     ========================================= -->
+
+<div id="recallq-intro" aria-label="RecallQ product introduction">
+
+    <!-- Cinematic background -->
+    <div class="intro-grid"></div>
+    <div class="intro-vignette"></div>
+    <div class="intro-particles" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Skip control -->
+    <button class="intro-skip" id="skipIntro" type="button">
+        Skip intro ↗
+    </button>
+
+    <!-- Scene 1: Logo reveal -->
+    <section class="intro-scene intro-scene-logo" id="introLogoScene">
+
+        <div class="intro-logo-symbol">
+            <span>R</span>
+        </div>
+
+        <div class="intro-logo-wordmark">
+            Recall<span>Q</span>
+        </div>
+
+        <p class="intro-tagline">
+            Remember what you need.
+            <span>Not where you saved it.</span>
+        </p>
+
+        <div class="intro-loading-line">
+            <span></span>
+        </div>
+
+    </section>
+
+    <!-- Scene 2: Digital chaos -->
+    <section class="intro-scene intro-scene-files" id="introFilesScene">
+
+        <p class="intro-scene-label">
+            YOUR DIGITAL WORLD
+        </p>
+
+        <h2 class="intro-scene-heading">
+            Everything is saved.<br>
+            <span>Nothing is easy to find.</span>
+        </h2>
+
+        <div class="intro-file intro-file-one">
+            <div class="intro-file-icon">📄</div>
+            <div>
+                <div class="intro-file-name">Project Research</div>
+                <div class="intro-file-type">PDF DOCUMENT</div>
+            </div>
+        </div>
+
+        <div class="intro-file intro-file-two">
+            <div class="intro-file-icon">🖼️</div>
+            <div>
+                <div class="intro-file-name">Saved Screenshot</div>
+                <div class="intro-file-type">PNG IMAGE</div>
+            </div>
+        </div>
+
+        <div class="intro-file intro-file-three">
+            <div class="intro-file-icon">📝</div>
+            <div>
+                <div class="intro-file-name">Personal Notes</div>
+                <div class="intro-file-type">TEXT DOCUMENT</div>
+            </div>
+        </div>
+
+        <div class="intro-file intro-file-four">
+            <div class="intro-file-icon">📁</div>
+            <div>
+                <div class="intro-file-name">Important Files</div>
+                <div class="intro-file-type">DIGITAL ARCHIVE</div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Scene 3: Intelligent search -->
+    <section class="intro-scene intro-scene-search" id="introSearchScene">
+
+        <div class="intro-search-brand">
+            <span class="intro-search-brand-icon">R</span>
+            <span>Recall<span>Q</span></span>
+        </div>
+
+        <p class="intro-scene-label">
+            YOUR MEMORY, UNDERSTOOD
+        </p>
+
+        <h2 class="intro-search-heading">
+            Just describe what<br>
+            <span>you're looking for.</span>
+        </h2>
+
+        <div class="intro-search-box">
+            <span class="intro-search-icon">⌕</span>
+            <span id="introTypedQuery"></span>
+            <span class="intro-cursor"></span>
+        </div>
+
+        <div class="intro-search-status" id="introSearchStatus">
+            Understanding your request...
+        </div>
+
+        <!-- Simulated search result -->
+        <div class="intro-search-result" id="introSearchResult">
+
+            <div class="intro-result-icon">🖼️</div>
+
+            <div class="intro-result-info">
+                <div class="intro-result-label">
+                    BEST MATCH FOUND
+                </div>
+
+                <div class="intro-result-name">
+                    project_idea_screenshot.png
+                </div>
+
+                <div class="intro-result-description">
+                    A screenshot related to your project research.
+                </div>
+            </div>
+
+            <div class="intro-result-match">98%</div>
+
+        </div>
+
+    </section>
+
+    <!-- Intro progress -->
+    <div class="intro-progress" aria-hidden="true">
+        <span id="introProgressBar"></span>
+    </div>
+
+</div>
+
+<!-- Existing landing page begins below -->
+
+<!-- Existing landing page begins below -->
+
 
 <!-- Navigation -->
 <header class="site-header">
@@ -210,4 +370,7 @@
 
 {% endblock %}
 
+{% block page_js %}
+<script src="{{ url_for('static', filename='js/intro.js') }}"></script>
+{% endblock %}
 
