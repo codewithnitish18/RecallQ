@@ -183,15 +183,28 @@
             <a href="#features">Features</a>
         </div>
 
-        <div class="nav-actions">
-            <a href="{{ url_for('workspace') }}" class="nav-workspace">
-                Open Workspace <span aria-hidden="true">↗</span>
-            </a>
+       
+<div class="nav-actions">
 
-            <a href="{{ url_for('workspace') }}" class="nav-cta">
-                Get Started <span aria-hidden="true">→</span>
-            </a>
-        </div>
+    <button
+        class="nav-replay-intro"
+        id="replayIntro"
+        type="button"
+        aria-label="Replay RecallQ introduction">
+        ↻ <span>Replay Intro</span>
+    </button>
+
+    <a href="{{ url_for('workspace') }}" class="nav-workspace">
+        Open Workspace <span aria-hidden="true">↗</span>
+    </a>
+
+    <a href="{{ url_for('workspace') }}" class="nav-cta">
+        Get Started <span aria-hidden="true">→</span>
+    </a>
+
+</div>
+
+
 
     </nav>
 </header>
