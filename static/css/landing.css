@@ -1001,3 +1001,38 @@
 .nav-replay-intro:active {
     transform: translateY(0);
 }
+
+/* Hero preview animated search */
+.preview-search-text {
+flex: 1;
+min-width: 0;
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+}
+
+.preview-search-cursor {
+width: 1px;
+height: 15px;
+flex-shrink: 0;
+background: #b9a3ff;
+animation: previewCursorBlink 1s steps(2, start) infinite;
+}
+
+@keyframes previewCursorBlink {
+to {
+visibility: hidden;
+}
+}
+
+/* RecallQ search result highlight */
+.preview-file-match {
+transition: border-color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.preview-file-match.is-found {
+border-color: rgba(155, 122, 255, 0.7);
+background: rgba(155, 122, 255, 0.10);
+box-shadow: 0 0 22px rgba(155, 122, 255, 0.12);
+}
+

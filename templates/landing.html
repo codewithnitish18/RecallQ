@@ -288,13 +288,26 @@
                         </div>
 
 
-                        <div class="preview-search">
-                            <span class="search-symbol" aria-hidden="true">⌕</span>
+            
+        <div class="preview-search">
 
-                            <span>Find something you remember...</span>
+            <span class="search-symbol" aria-hidden="true">⌕</span>
 
-                            <span class="search-shortcut">⌘ K</span>
-                        </div>
+            <span class="preview-search-text" id="previewSearchText">
+              Find something you remember...
+            </span>
+
+            <span
+             class="preview-search-cursor"
+             id="previewSearchCursor"
+             aria-hidden="true">
+             </span>
+
+            <span class="search-shortcut">⌘ K</span>
+
+        </div>
+
+
 
 
                         <div class="preview-results-heading">
@@ -303,7 +316,7 @@
                         </div>
 
 
-                        <div class="preview-file">
+                        <div class="preview-file preview-file-match">
                             <div class="file-icon pdf-icon">PDF</div>
 
                             <div class="file-details">
@@ -385,5 +398,6 @@
 
 {% block page_js %}
 <script src="{{ url_for('static', filename='js/intro.js') }}"></script>
+<script src="{{ url_for('static', filename='js/landing-preview.js') }}"></script>
 {% endblock %}
 
