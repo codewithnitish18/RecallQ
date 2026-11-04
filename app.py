@@ -1,7 +1,15 @@
 from pathlib import Path
 from uuid import uuid4
+import json
 
-from flask import Flask, jsonify, render_template, request
+from flask import (
+    Flask,
+    jsonify,
+    render_template,
+    request,
+    send_from_directory,
+    abort,
+)
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -9,7 +17,9 @@ app = Flask(__name__)
 UPLOAD_FOLDER = Path(app.root_path) / "uploads"
 UPLOAD_FOLDER.mkdir(exist_ok=True)
 
-app.config["MAX_CONTENT_LENGTH"] = 25 * 1024 * 1024  # 25 MB per request
+METADATA_FILE = UPLOAD_FOLDER / "metadata.json"
+
+app.config["MAX_CONTENT_LENGTH"] = 25 * 1024 * 1024
 
 ALLOWED_EXTENSIONS = {
     ".pdf",
@@ -20,20 +30,58 @@ ALLOWED_EXTENSIONS = {
     ".jpeg",
 }
 
+PREVIEW_EXTENSIONS = {
+    ".pdf",
+    ".txt",
+    ".png",
+    ".jpg",
+    ".jpeg",
+}
 
+
+# -------------------------------
+# Metadata helpers
+# -------------------------------
+
+def load_metadata():
+    if not METADATA_FILE.exists():
+        return {}
+
+    try:
+        return json.loads(METADATA_FILE.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+
+
+def save_metadata(metadata):
+    METADATA_FILE.write_text(
+        json.dumps(metadata, indent=4),
+        encoding="utf-8",
+    )
+
+
+# -------------------------------
 # Landing page
+# -------------------------------
+
 @app.route("/")
 def home():
     return render_template("landing.html")
 
 
-# Actual application workspace
+# -------------------------------
+# Workspace
+# -------------------------------
+
 @app.route("/workspace")
 def workspace():
     return render_template("workspace.html")
 
 
+# -------------------------------
 # Upload files
+# -------------------------------
+
 @app.route("/upload", methods=["POST"])
 def upload_files():
     files = request.files.getlist("files")
@@ -43,6 +91,7 @@ def upload_files():
             "error": "Please select at least one file."
         }), 400
 
+    metadata = load_metadata()
     saved_files = []
     errors = []
 
@@ -69,15 +118,21 @@ def upload_files():
         try:
             file.save(destination)
 
-            saved_files.append({
+            file_info = {
                 "name": original_name,
                 "stored_name": unique_name,
-            })
+                "size": destination.stat().st_size,
+            }
+
+            metadata[unique_name] = file_info
+            saved_files.append(file_info)
 
         except OSError:
             errors.append(
                 f"{original_name}: could not save the file."
             )
+
+    save_metadata(metadata)
 
     status_code = 207 if saved_files and errors else (
         400 if errors and not saved_files else 200
@@ -90,7 +145,98 @@ def upload_files():
     }), status_code
 
 
+# -------------------------------
+# List uploaded files
+# -------------------------------
+
+@app.route("/files", methods=["GET"])
+def get_files():
+    metadata = load_metadata()
+    available_files = []
+
+    for stored_name, file_info in metadata.items():
+        file_path = UPLOAD_FOLDER / stored_name
+
+        if not file_path.is_file():
+            continue
+
+        available_files.append({
+            "name": file_info["name"],
+            "stored_name": stored_name,
+            "size": file_path.stat().st_size,
+            "extension": file_path.suffix.lower(),
+        })
+
+    available_files.sort(
+        key=lambda item: item["name"].lower()
+    )
+
+    return jsonify({
+        "files": available_files
+    })
+
+
+# -------------------------------
+# Preview files
+# -------------------------------
+
+@app.route("/preview/<stored_name>", methods=["GET"])
+def preview_file(stored_name):
+    metadata = load_metadata()
+
+    if stored_name not in metadata:
+        abort(404)
+
+    file_path = UPLOAD_FOLDER / stored_name
+
+    if not file_path.is_file():
+        abort(404)
+
+    extension = file_path.suffix.lower()
+
+    if extension not in PREVIEW_EXTENSIONS:
+        return jsonify({
+            "error": "Preview is not supported for this file type."
+        }), 415
+
+    return send_from_directory(
+        UPLOAD_FOLDER,
+        stored_name,
+        as_attachment=False,
+    )
+
+
+# -------------------------------
+# Delete files
+# -------------------------------
+
+@app.route("/delete/<stored_name>", methods=["DELETE"])
+def delete_file(stored_name):
+    metadata = load_metadata()
+
+    if stored_name not in metadata:
+        return jsonify({
+            "error": "File not found."
+        }), 404
+
+    file_path = UPLOAD_FOLDER / stored_name
+
+    try:
+        if file_path.exists():
+            file_path.unlink()
+
+        del metadata[stored_name]
+        save_metadata(metadata)
+
+        return jsonify({
+            "message": "File deleted successfully."
+        })
+
+    except OSError:
+        return jsonify({
+            "error": "Could not delete the file."
+        }), 500
+
+
 if __name__ == "__main__":
     app.run(debug=True)
-
-

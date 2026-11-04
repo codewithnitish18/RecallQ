@@ -1036,3 +1036,28 @@ background: rgba(155, 122, 255, 0.10);
 box-shadow: 0 0 22px rgba(155, 122, 255, 0.12);
 }
 
+/* Gentle floating animation for hero cards */
+.floating-card-top {
+    animation: floatCard 5s ease-in-out infinite;
+}
+
+.floating-card-bottom {
+    animation: floatCard 6s ease-in-out infinite reverse;
+}
+
+@keyframes floatCard {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .floating-card-top,
+    .floating-card-bottom {
+        animation: none;
+    }
+}
