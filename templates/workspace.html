@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}RecallQ | Workspace{% endblock %}
+{% block title %}RecallQ | Your Personal AI Memory{% endblock %}
 
 {% block page_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/workspace.css') }}">
@@ -10,140 +10,273 @@
 
 <div class="workspace-layout">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
+    <!-- TOP NAVIGATION -->
+    <header class="workspace-navbar">
+
         <a href="{{ url_for('home') }}" class="workspace-brand">
             <span class="brand-icon">R</span>
             <span>Recall<span class="brand-q">Q</span></span>
         </a>
 
-        <div class="sidebar-label">WORKSPACE</div>
+        <nav class="workspace-nav">
 
-        <nav class="sidebar-nav">
-            <a href="#" class="sidebar-link active" data-filter="all">
-                <span>⌂</span> Overview
+            <a href="#" class="sidebar-link nav-link active" data-filter="all">
+                Overview
             </a>
-            <a href="#" class="sidebar-link" data-filter="all">
-                <span>▤</span> All Files
+
+            <a href="#memories" class="sidebar-link nav-link" data-filter="all">
+                My Memories
             </a>
-            <a href="#" class="sidebar-link" data-filter="image">
-                <span>▧</span> Images & Screenshots
+
+            <a href="#timeline" class="nav-link">
+                Timeline
             </a>
-            <a href="#" class="sidebar-link" data-filter="document">
-                <span>▤</span> Documents
-            </a>
-            <a href="#" class="sidebar-link" data-filter="recent">
-                <span>◷</span> Recent Files
-            </a>
+
+            <span class="nav-link nav-coming-soon">
+                AI Assistant <span class="coming-soon-label">SOON</span>
+            </span>
+
         </nav>
 
-        <div class="sidebar-bottom">
-            <a href="{{ url_for('home') }}" class="sidebar-link">
-                <span>←</span> Back to Home
-            </a>
-            <div class="sidebar-user">
-                <div class="user-avatar">N</div>
-                <div>
-                    <strong>My Workspace</strong>
-                    <small>Personal Memory</small>
-                </div>
-            </div>
-        </div>
-    </aside>
-
-    <!-- MAIN CONTENT -->
-    <main class="workspace-main">
-
-        <header class="workspace-header">
-            <div>
-                <span class="welcome-label">YOUR PERSONAL DIGITAL SPACE</span>
-                <h1>Good to see you <span>👋</span></h1>
-                <p>Your memories, documents and ideas — all in one place.</p>
-            </div>
+        <div class="navbar-actions">
 
             <button class="upload-button" id="uploadTrigger">
                 <span>＋</span> Upload Files
             </button>
-        </header>
 
-        <!-- INTELLIGENT SEARCH -->
-        <section class="memory-search-section">
-            <div class="search-heading">
-                <span class="section-eyebrow">INTELLIGENT RETRIEVAL</span>
-                <h2>What are you <span>looking for?</span></h2>
-                <p>Describe what you remember. We'll help you find it.</p>
+            <div class="profile-avatar" title="Personal Workspace">
+                ✦
             </div>
 
+        </div>
+
+    </header>
+
+
+    <!-- MAIN WORKSPACE -->
+    <main class="workspace-main">
+
+
+        <!-- WELCOME SECTION -->
+        <section class="workspace-header">
+
+            <div class="welcome-content">
+
+                <span class="welcome-label">
+                    YOUR PERSONAL MEMORY SPACE
+                </span>
+
+                <h1>
+                    Your memory,<br>
+                    <span>beyond imagination.</span>
+                </h1>
+
+                <p>
+                    Everything you've saved, ready when you need it.
+                    Bring your digital memories together in one intelligent space.
+                </p>
+
+            </div>
+
+            <div class="welcome-visual">
+                <div class="visual-orbit orbit-one"></div>
+                <div class="visual-orbit orbit-two"></div>
+                <div class="visual-core">
+                    <span>R</span>
+                </div>
+                <div class="visual-glow"></div>
+            </div>
+
+        </section>
+
+
+        <!-- MEMORY SEARCH -->
+        <section class="memory-search-section">
+
+            <div class="search-heading">
+
+                <div>
+                    <span class="section-eyebrow">
+                        YOUR MEMORY, ONE SEARCH AWAY
+                    </span>
+
+                    <h2>
+                        What would you like to <span>find?</span>
+                    </h2>
+
+                    <p>
+                        Start with a filename or a keyword you remember.
+                    </p>
+                </div>
+
+                <div class="search-decoration">✧</div>
+
+            </div>
+
+
             <div class="memory-search-box">
+
                 <span class="memory-search-icon">⌕</span>
+
                 <input
                     type="text"
                     id="memorySearch"
-                    placeholder="e.g. Find the screenshot of my Python project..."
+                    placeholder="Search your saved files..."
                     autocomplete="off"
                 >
-                <button id="searchButton">Search <span>→</span></button>
+
+                <button id="searchButton">
+                    Search <span>→</span>
+                </button>
+
             </div>
+
 
             <div class="search-suggestions">
-                <span>Try:</span>
-                <button type="button" class="suggestion">Python notes</button>
-                <button type="button" class="suggestion">Project screenshots</button>
-                <button type="button" class="suggestion">PDF documents</button>
+
+                <span>Quick searches</span>
+
+                <button type="button" class="suggestion">
+                    Python notes
+                </button>
+
+                <button type="button" class="suggestion">
+                    Project screenshots
+                </button>
+
+                <button type="button" class="suggestion">
+                    PDF documents
+                </button>
+
             </div>
+
+            <!-- LIVE SEARCH RESULTS -->
+        <div class="search-results" id="searchResults" hidden>
+
+        <div class="search-results-heading">
+        <h3>Search Results</h3>
+        <span id="searchResultCount">0 found</span>
+    </div>
+
+          <div class="search-results-list" id="searchResultsList">
+    </div>
+
+         </div>
+
         </section>
 
-        <!-- FILE OVERVIEW -->
-        <section class="file-overview">
+
+        <!-- MEMORY LIBRARY -->
+        <section class="file-overview" id="memories">
+
             <div class="section-heading">
+
                 <div>
-                    <h2>Your Library</h2>
-                    <p>Everything you've saved in RecallQ.</p>
+                    <span class="section-eyebrow">YOUR COLLECTION</span>
+                    <h2>Your Memory Library</h2>
+                    <p>A home for everything you want to remember.</p>
                 </div>
-                <span class="file-count" id="fileCount">0 files</span>
+
+                <span class="file-count" id="fileCount">
+                    0 files
+                </span>
+
             </div>
 
+
             <div class="category-grid">
+
+                <!-- ALL MEMORIES -->
+                <button class="category-card" data-filter="all">
+
+                    <span class="category-icon purple">✧</span>
+
+                    <span class="category-info">
+                        <strong>All Memories</strong>
+                        <small>Your complete collection</small>
+                    </span>
+
+                    <span class="category-arrow">↗</span>
+
+                </button>
+
+
+                <!-- DOCUMENTS -->
                 <button class="category-card" data-filter="document">
-                    <span class="category-icon purple">▤</span>
+
+                    <span class="category-icon cyan">▤</span>
+
                     <span class="category-info">
                         <strong>Documents</strong>
-                        <small>PDF, DOCX, TXT</small>
+                        <small>PDF, DOCX and TXT</small>
                     </span>
+
                     <span class="category-arrow">↗</span>
+
                 </button>
 
+
+                <!-- IMAGES -->
                 <button class="category-card" data-filter="image">
-                    <span class="category-icon cyan">▧</span>
+
+                    <span class="category-icon orange">▧</span>
+
                     <span class="category-info">
                         <strong>Images</strong>
-                        <small>Photos & screenshots</small>
+                        <small>Photos and screenshots</small>
                     </span>
+
                     <span class="category-arrow">↗</span>
+
                 </button>
 
+
+                <!-- RECENT -->
                 <button class="category-card" data-filter="recent">
-                    <span class="category-icon orange">◷</span>
+
+                    <span class="category-icon green">◷</span>
+
                     <span class="category-info">
                         <strong>Recently Added</strong>
                         <small>Your latest uploads</small>
                     </span>
+
                     <span class="category-arrow">↗</span>
+
                 </button>
+
             </div>
+
         </section>
 
-        <!-- UPLOAD AREA -->
+
+        <!-- UPLOAD SECTION -->
         <section class="upload-section" id="uploadArea">
+
             <div class="upload-content">
+
                 <div class="upload-icon">↑</div>
+
                 <div>
-                    <h3>Bring your digital memories together</h3>
-                    <p>Drag and drop files here, or choose files from your device.</p>
+                    <h3>Add something to your memory</h3>
+
+                    <p>
+                        Drop your files here or browse your device
+                        to start building your personal memory library.
+                    </p>
+
+                    <small>
+                        PDF · DOCX · TXT · PNG · JPG
+                    </small>
                 </div>
+
             </div>
 
-            <button class="browse-button" id="browseFiles">Browse Files</button>
+
+            <button class="browse-button" id="browseFiles">
+                Browse Files <span>→</span>
+            </button>
+
 
             <input
                 type="file"
@@ -152,41 +285,129 @@
                 accept=".pdf,.txt,.docx,.png,.jpg,.jpeg"
                 hidden
             >
+
         </section>
 
-        <div class="upload-status" id="uploadStatus" role="status"></div>
 
-        <!-- RECENT FILES -->
+        <div
+            class="upload-status"
+            id="uploadStatus"
+            role="status"
+        ></div>
+
+
+        <!-- RECENT MEMORIES -->
         <section class="recent-section">
+
             <div class="section-heading">
+
                 <div>
-                    <h2 id="filesHeading">Recent Files</h2>
-                    <p>Your digital memory, organized.</p>
+                    <span class="section-eyebrow">YOUR COLLECTION</span>
+
+                    <h2 id="filesHeading">
+                        Recently Added
+                    </h2>
+
+                    <p>
+                        Pick up right where you left off.
+                    </p>
                 </div>
-                <button class="view-all-button" id="viewAllFiles">View all →</button>
+
+                <button class="view-all-button" id="viewAllFiles">
+                    View all <span>→</span>
+                </button>
+
             </div>
+
 
             <div class="files-list" id="filesList">
+
                 <div class="empty-state" id="emptyState">
-                    <div class="empty-icon">▤</div>
-                    <h3>Your library is waiting</h3>
-                    <p>Upload your first files and start building your digital memory.</p>
-                    <button class="empty-upload-button" id="emptyUploadTrigger">
-                        Upload your first file →
+
+                    <div class="empty-icon">✧</div>
+
+                    <h3>Your memory library starts here</h3>
+
+                    <p>
+                        Upload your first document, image or note.
+                        Your digital collection will appear here.
+                    </p>
+
+                    <button
+                        class="empty-upload-button"
+                        id="emptyUploadTrigger"
+                    >
+                        Add your first memory →
                     </button>
+
                 </div>
+
             </div>
+
         </section>
 
+
+        <!-- MEMORY TIMELINE PREVIEW -->
+        <section class="timeline-section" id="timeline">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-eyebrow">YOUR DIGITAL JOURNEY</span>
+
+                    <h2>Memory Timeline</h2>
+
+                    <p>
+                        A clearer view of everything you've collected over time.
+                    </p>
+                </div>
+
+                <span class="timeline-icon">◷</span>
+
+            </div>
+
+            <div class="timeline-preview">
+
+                <div class="timeline-line"></div>
+
+                <div class="timeline-placeholder-icon">
+                    ✧
+                </div>
+
+                <div>
+                    <h3>Your timeline will grow with you</h3>
+
+                    <p>
+                        As you add more memories, this space will help
+                        you explore your collection over time.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
         <footer class="workspace-footer">
-            <span>RecallQ — Remember what you need. Not where you saved it.</span>
-            <span>YOUR DIGITAL MEMORY</span>
+
+            <span>
+                RecallQ — Everything you save. Nothing you forget.
+            </span>
+
+            <span>
+                YOUR PERSONAL AI MEMORY
+            </span>
+
         </footer>
 
+
     </main>
+
 </div>
 
 {% endblock %}
+
 
 {% block page_js %}
 <script src="{{ url_for('static', filename='js/workspace.js') }}"></script>
