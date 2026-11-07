@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
+
+
 :root {
 --bg-primary: #080A12;
 --bg-secondary: #0D101B;
@@ -28,6 +30,18 @@
 --container-width: 1160px;
 
 
+}
+
+/* Prevent white flash during page navigation */
+
+html {
+    background-color: #080a12;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    background-color: #080a12;
 }
 
 * {

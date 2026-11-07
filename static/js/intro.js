@@ -98,13 +98,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Finish the intro.
-    function finishIntro() {
+  function finishIntro() {
     if (introFinished) return;
 
     introFinished = true;
     clearIntroTimers();
 
     intro.classList.add("intro-exit");
+
+    window.setTimeout(() => {
+        window.location.href = "/workspace";
+    }, 800);
 }
 
 function replayIntro() {

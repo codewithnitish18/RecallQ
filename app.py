@@ -59,9 +59,8 @@ def save_metadata(metadata):
         encoding="utf-8",
     )
 
-
 # -------------------------------
-# Landing page
+# Landing page with cinematic intro
 # -------------------------------
 
 @app.route("/")
@@ -76,7 +75,6 @@ def home():
 @app.route("/workspace")
 def workspace():
     return render_template("workspace.html")
-
 
 # -------------------------------
 # Upload files
