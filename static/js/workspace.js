@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const uploadArea = document.getElementById("uploadArea");
     const uploadStatus = document.getElementById("uploadStatus");
-
+    const filesLoading = document.getElementById("filesLoading");
     const filesList = document.getElementById("filesList");
     const fileCount = document.getElementById("fileCount");
 
@@ -424,33 +424,50 @@ function renderFiles() {
     // LOAD FILES FROM FLASK
     // =====================================
 
-    async function loadFiles() {
+   async function loadFiles() {
 
-        try {
+    // Show loading indicator
+    if (filesLoading) {
+        filesLoading.style.display = "block";
+    }
 
-            const response = await fetch("/files");
+    // Temporarily hide the file list
+    filesList.style.display = "none";
 
-            if (!response.ok) {
-                throw new Error("Could not load your files.");
-            }
+    try {
 
-            const result = await response.json();
+        const response = await fetch("/files");
 
-            uploadedFiles = result.files || [];
-
-            renderFiles();
-
-        } catch (error) {
-
-            console.error("File loading error:", error);
-
-            uploadStatus.textContent = error.message;
-
+        if (!response.ok) {
+            throw new Error("Could not load your files.");
         }
+
+        const result = await response.json();
+
+        uploadedFiles = result.files || [];
+
+        // Display updated files
+        renderFiles();
+
+    } catch (error) {
+
+        console.error("File loading error:", error);
+
+        uploadStatus.textContent = error.message;
+
+    } finally {
+
+        // Hide loading indicator
+        if (filesLoading) {
+            filesLoading.style.display = "none";
+        }
+
+        // Restore file list
+        filesList.style.display = "";
 
     }
 
-
+}
     // =====================================
     // DELETE FILE
     // =====================================

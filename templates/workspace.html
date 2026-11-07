@@ -118,12 +118,7 @@
 
                 <span class="memory-search-icon">⌕</span>
 
-                <input
-                    type="text"
-                    id="memorySearch"
-                    placeholder="Search your saved files..."
-                    autocomplete="off"
-                >
+                <input type="text" id="memorySearch" placeholder="Search your saved files..." autocomplete="off">
 
                 <button id="searchButton">
                     Search <span>→</span>
@@ -151,17 +146,17 @@
             </div>
 
             <!-- LIVE SEARCH RESULTS -->
-        <div class="search-results" id="searchResults" hidden>
+            <div class="search-results" id="searchResults" hidden>
 
-        <div class="search-results-heading">
-        <h3>Search Results</h3>
-        <span id="searchResultCount">0 found</span>
-    </div>
+                <div class="search-results-heading">
+                    <h3>Search Results</h3>
+                    <span id="searchResultCount">0 found</span>
+                </div>
 
-          <div class="search-results-list" id="searchResultsList">
-    </div>
+                <div class="search-results-list" id="searchResultsList">
+                </div>
 
-         </div>
+            </div>
 
         </section>
 
@@ -278,22 +273,12 @@
             </button>
 
 
-            <input
-                type="file"
-                id="fileInput"
-                multiple
-                accept=".pdf,.txt,.docx,.png,.jpg,.jpeg"
-                hidden
-            >
+            <input type="file" id="fileInput" multiple accept=".pdf,.txt,.docx,.png,.jpg,.jpeg" hidden>
 
         </section>
 
 
-        <div
-            class="upload-status"
-            id="uploadStatus"
-            role="status"
-        ></div>
+        <div class="upload-status" id="uploadStatus" role="status"></div>
 
 
         <!-- RECENT MEMORIES -->
@@ -318,9 +303,13 @@
                 </button>
 
             </div>
-
+            <div class="loading-state" id="filesLoading">
+                <div class="loading-spinner"></div>
+                <p>Loading your memories...</p>
+            </div>
 
             <div class="files-list" id="filesList">
+
 
                 <div class="empty-state" id="emptyState">
 
@@ -333,10 +322,7 @@
                         Your digital collection will appear here.
                     </p>
 
-                    <button
-                        class="empty-upload-button"
-                        id="emptyUploadTrigger"
-                    >
+                    <button class="empty-upload-button" id="emptyUploadTrigger">
                         Add your first memory →
                     </button>
 

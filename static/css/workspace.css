@@ -1415,3 +1415,35 @@ body {
     color: var(--workspace-muted);
     font-size: 12px;
 }
+
+
+/* =========================================
+   FILE LIBRARY LOADING STATE
+========================================= */
+
+.loading-state {
+    display: none;
+    text-align: center;
+    padding: 45px 20px;
+    color: var(--workspace-muted);
+}
+
+.loading-spinner {
+    width: 30px;
+    height: 30px;
+    margin: 0 auto 15px;
+    border: 3px solid rgba(155,122,255,.15);
+    border-top-color: var(--workspace-purple);
+    border-radius: 50%;
+    animation: memorySpin .8s linear infinite;
+}
+
+.loading-state p {
+    font-size: 12px;
+}
+
+@keyframes memorySpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
